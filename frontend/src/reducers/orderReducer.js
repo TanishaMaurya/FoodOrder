@@ -11,13 +11,13 @@ import {
   ORDER_DETAILS_SUCCESS,
 } from "../constants/orderConstant";
 
-const intitialState = {
+const initialState = {
   loading: false,
   error: null,
   order: null,
 };
 
-export const newOrderReducer = (state = intitialState, action) => {
+export const newOrderReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       return {
@@ -57,31 +57,29 @@ export const myOrderReducer = (state = { orders: [] }, action) => {
         ...state,
         loading: true,
       };
-
     case MY_ORDER_SUCCESS:
       return {
         ...state,
         loading: false,
         orders: action.payload,
       };
-
     case MY_ORDER_FAIL:
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
-
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
-
     default:
       return state;
   }
 };
+
+// order Details
 
 export const orderDetailsReducer = (state = { order: {} }, action) => {
   switch (action.type) {

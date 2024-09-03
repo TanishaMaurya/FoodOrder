@@ -3,19 +3,19 @@ import Loader from "../layouts/Loader";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { clearErrors, getOrderDetails } from "../../actions/orderAction";
 
 const OrderDetails = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-
   const { id } = useParams();
   const {
     loading,
     error,
     order = {},
   } = useSelector((state) => state.orderDetails);
+
   const {
     deliveryInfo,
     orderItems,
@@ -35,7 +35,9 @@ const OrderDetails = () => {
 
   const deliveryDetails =
     deliveryInfo &&
-    `${deliveryInfo.address}, ${deliveryInfo.city}, ${deliveryInfo.postalCode}, ${deliveryInfo.country}`;
+    `${deliveryInfo.address}, ${deliveryInfo.city}, ${deliveryInfo.postalCode}
+    ${deliveryInfo.country}
+    `;
 
   const isPaid = paymentInfo && paymentInfo.status === "paid" ? true : false;
 
@@ -47,7 +49,7 @@ const OrderDetails = () => {
         <>
           <div className="row d-flex justify-content-between orderdetails">
             <div className="col-12 col-lg-8 mt-1 order-details">
-              <h1 className="my-5">Order {order._id}</h1>
+              <h1 className="my-5">Order # {order._id}</h1>
 
               <h4 className="mb-4">Delivery Info</h4>
               <p>
@@ -61,7 +63,8 @@ const OrderDetails = () => {
                 {deliveryDetails}
               </p>
               <p>
-                <b>Amount:</b> <LiaRupeeSignSolid /> {finalTotal}
+                <b>Amount:</b> <LiaRupeeSignSolid />
+                {finalTotal}
               </p>
 
               <hr />

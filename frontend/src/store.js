@@ -1,14 +1,12 @@
+
+
 import {
-  legacy_createStore as create_store,
-  combineReducers, // needed because we are using 1+ reducers
-  applyMiddleware, // needed to use any middleware
-  compose, // utility for convenience to improve readability
+  legacy_createStore as createStore,
+  combineReducers,
+  applyMiddleware,
+  compose,
 } from "redux";
-
-// "thunk" => piece of code that does some delayed work
-// thunks -> std approach for async logic in Redux apps
-import thunk from "redux-thunk"; // helps with data fetching
-
+import thunk from "redux-thunk";
 import { restaurantReducer } from "./reducers/restaurantReducer";
 import { menuReducer } from "./reducers/menuReducer";
 import {
@@ -35,12 +33,14 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
 });
 
-// to use redux devtools browser extension
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const middleware = [thunk]; // middleware handled by thunk
+const composeenhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = create_store(
+const middleware = [thunk];
+
+const store = createStore(
   reducer,
-  composeEnhancers(applyMiddleware(...middleware))
+  composeenhancers(applyMiddleware(...middleware))
 );
+
 export default store;
+
